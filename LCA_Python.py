@@ -74,10 +74,6 @@ root46 = (findLCA(root, 4, 6,))
 root34 = (findLCA(root, 3, 4,))
 root24 = (findLCA(root, 2, 4,))
 print ('LCA(4, 5) = ' + str(root45))
-print ('LCA(4, 6) = '  + str(root46))
-print ('LCA(3, 4) = '  + str(root34))
-print ('LCA(2, 4) = '  + str(root24))
-
-
-
-# This code is contributed by Nikhil Kumar Singh(nickzuck_007)
+print ('LCA(4, 6) = ' + str(root46))
+print ('LCA(3, 4) = ' + str(root34))
+print ('LCA(2, 4) = ' + str(root24))
