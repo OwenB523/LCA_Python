@@ -1,39 +1,40 @@
 import unittest
-import LCA_Python
+from LCA import *
+
 
 class TestLCA(unittest.TestCase):
 
-    def test_RegularTree(self):
-        #print("Test1: Test Regular Tree:")
-        root = LCA_Python.Node(1)
-        root.left = LCA_Python.Node(2)
-        root.right = LCA_Python.Node(3)
-        root.left.left = LCA_Python.Node(4)
-        root.left.right = LCA_Python.Node(5)
-        root.right.left = LCA_Python.Node(6)
-        root.right.right = LCA_Python.Node(7)
+    def test_empty_tree(self):
+        tree = Tree()
+        self.assertEqual(tree.find_LCA(1, 2), None)
 
-        #print(root)
+    def test_single_node(self):
+        tree = Tree()
+        tree.put(2)
+        self.assertEqual(tree.find_LCA(2, 2), None)
+        self.assertEqual(tree.find_LCA(2, 1), None)
 
-        self.assertEqual(3, LCA_Python.findLCA(root, 6, 7), "3 should be the lowest common ancestor of 6 and 7")
+    def test_identical(self):
+        tree = Tree()
+        nodes = [2, 1, 4, 4]
+        for x in nodes:
+            tree.put(x)
+        self.assertEqual(tree.find_LCA(4, 4), None)
+        self.assertEqual(tree.find_LCA(1, 1), None)
 
-    def test_NullTree(self):
-        #print("Test2: Test Null Tree:")
-        root = None
-        self.assertEqual(-1, LCA_Python.findLCA(root, 6, 7), " The output should be -1 since the tree is empty")
+    def test_LCA(self):
+        nodes = [30, 8, 52, 3, 20, 10, 29, 62]
+        tree = Tree()
+        for x in nodes:
+            tree.put(x)
+        self.assertEqual(tree.find_LCA(3, 8), 30)
+        self.assertEqual(tree.find_LCA(3, 29), 8)
+        self.assertEqual(tree.find_LCA(10, 29), 20)
+        self.assertEqual(tree.find_LCA(3, 62), 30)
+        self.assertEqual(tree.find_LCA(62, 52), 30)
+        self.assertEqual(tree.find_LCA(4, 29), None)
 
 
-    def test_TwoNodesNotPresent(self):
-        #print("Test3: testTwoNodesNotPresent:")
-        root = LCA_Python.Node(1)
-        self.assertEqual(-1, LCA_Python.findLCA(root, 6, 7), " The output should be -1 both nodes are missing")
 
-    def test_OneNodeNotPresent(self):
-        #print("Test4: testOneNodeNotPresent:")
-        root = LCA_Python.Node(1)
-        root.left = LCA_Python.Node(2)
-        self.assertEqual(-1, LCA_Python.findLCA(root, 2, 3), " The output should -1 since one of the nodes is missing")
-
-#Reminder if you don't put the word test in python functions they won't work!!
 if __name__ == '__main__':
     unittest.main()
